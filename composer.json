@@ -1,0 +1,23 @@
+{
+    "require": {
+        "silex/silex": "~1.1",
+        "predis/predis": "~0.8",
+        "predis/service-provider": "~0.4"
+    },
+    "require-dev": {
+        "behat/behat":"*",
+        "behat/mink": "*",
+        "fabpot/goutte": "*@dev",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*",
+        "behat/mink-selenium-driver": "*",
+        "mockery/mockery": "dev-master@dev",
+        "sensiolabs/behat-page-object-extension": "*",
+        "phpspec/phpspec": "2.0.*@dev",
+        "bossa/phpspec2-expect": "dev-master"
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
