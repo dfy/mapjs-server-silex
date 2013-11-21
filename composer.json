@@ -1,4 +1,7 @@
 {
+    "autoload": {
+        "psr-0": {"IdeaMap": "src/"}
+    },
     "require": {
         "silex/silex": "~1.1",
         "predis/predis": "~0.8",
@@ -15,7 +18,8 @@
         "mockery/mockery": "dev-master@dev",
         "sensiolabs/behat-page-object-extension": "*",
         "phpspec/phpspec": "2.0.*@dev",
-        "bossa/phpspec2-expect": "dev-master"
+        "bossa/phpspec2-expect": "dev-master",
+        "kriswallsmith/buzz": ">=0.10"
     },
     "config": {
         "bin-dir": "bin"
