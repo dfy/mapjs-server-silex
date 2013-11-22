@@ -6,6 +6,8 @@ use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
+use Buzz\Message\Request;
+use Buzz\Browser;
 
 //
 // Require 3rd-party libraries here:
@@ -19,6 +21,12 @@ use Behat\Gherkin\Node\PyStringNode,
  */
 class FeatureContext extends BehatContext
 {
+    protected $baseUrl = 'http://localhost:8989';
+
+    protected $browser;
+
+    protected $lastName;
+
     /**
      * Initializes context.
      * Every scenario gets its own context object.
@@ -28,6 +36,7 @@ class FeatureContext extends BehatContext
     public function __construct(array $parameters)
     {
         // Initialize your context here
+        $this->browser = new Browser();
     }
 
     /**
@@ -45,16 +54,46 @@ class FeatureContext extends BehatContext
     public function iCreateTheIdeaMap($name)
     {
         // post create command to api root
+        // {cmd: "create", name: "$name"}
+        // {cmd: "create", content: {name: "$name"}} ?
 
-        throw new PendingException();
+        //$this->browser->call($this->baseUrl . '', 'GET');
+        $postVars = array(
+            'name' => $name
+        );
+        $this->browser->submit($this->baseUrl . '/api', $postVars, 'POST');
+        $this->lastName = $name;
     }
+
+    /*protected function lastStatusCode()
+    {
+        return $this->browser->getLastResponse()->getStatusCode();
+    }*/
 
     /**
      * @Then /^the idea map should be saved$/
      */
     public function theIdeaMapShouldBeSaved()
     {
-        throw new PendingException();
+        $response = $this->browser->getLastResponse();
+
+        $code = $response->getStatusCode();
+        if ($code !== 200) {
+            throw new RuntimeException("Expected response code 200, got $code");
+        }
+
+        $map = json_decode($response->getContent());
+        if (!is_object($map)) {
+            throw new RuntimeException("Could not decode response to JSON");
+        }
+
+        if (!$map->id || !is_numeric($map->id)) {
+            throw new RuntimeException("Saved idea map has no ID");
+        }
+
+        if (!$map->name || $map->name != $this->lastName) {
+            throw new RuntimeException("Expected map name {$this->lastName}, got {$map->name}");
+        }
     }
 
     /**
