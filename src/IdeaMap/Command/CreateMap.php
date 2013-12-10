@@ -7,7 +7,7 @@ namespace IdeaMap\Command;
 /**
  *  Command for creating a new map
  */
-class CreateMap
+class CreateMap extends Command
 {
     /**
      *  @var string
