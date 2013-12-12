@@ -2,7 +2,9 @@
 
 namespace IdeaMap;
 
+use IdeaMap\Command\CreateMap;
+
 interface MapRepository
 {
-    public function save(Map $map);
+    public function create(CreateMap $cmd);
 }

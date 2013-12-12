@@ -4,11 +4,12 @@ namespace spec\IdeaMap\Predis;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Predis\Client;
+use IdeaMap\Predis\Client;
+use IdeaMap\Command\CreateMap;
 
 class MapRepositorySpec extends ObjectBehavior
 {
-    public function let(Client $client)
+    function let(Client $client)
     {
         $this->beConstructedWith($client);
     }
@@ -18,13 +19,14 @@ class MapRepositorySpec extends ObjectBehavior
         $this->shouldHaveType('IdeaMap\Predis\MapRepository');
     }
 
-    /*function let(ProjectManager $manager)
+    function it_should_save_a_new_map(Client $client, CreateMap $cmd)
     {
-        $this->beConstructedWith('a project name', $manager);
+        $client->incr('ideamap:count:map')->shouldBeCalled()->willReturn(1);
+        //$client->incr('ideamap:count:map')->shouldBeCalled()->willReturn(1);
+
+        $this->create($cmd);
     }
 
-    function it_has_a_link_to_a_manager(ProjectManager $manager)
-    {
-        $this->getManager()->shouldReturn($manager);
-    }*/
+    // $user_id = $redis->incr('user:id');
+    // $client->hmset('metavars', array('foo' => 'bar', 'hoge' => 'piyo', 'lol' => 'wut'));
 }

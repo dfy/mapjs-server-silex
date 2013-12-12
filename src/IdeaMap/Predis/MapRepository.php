@@ -2,14 +2,15 @@
 
 namespace IdeaMap\Predis;
 
-use IdeaMap\Map;
 use IdeaMap\MapRepository as MapRepositoryInterface;
-use Predis\Client;
+use IdeaMap\Command\CreateMap;
 
 class MapRepository implements MapRepositoryInterface
 {
+    const MAP_COUNT_KEY = 'ideamap:count:map';
+
     /**
-     *  @var Predis\Client
+     *  @var IdeaMap\Predis\Client
      */
     protected $client;
 
@@ -18,8 +19,10 @@ class MapRepository implements MapRepositoryInterface
         $this->client = $client;
     }
 
-    public function save(Map $map)
+    public function create(CreateMap $cmd)
     {
+        $mapId = $this->client->incr(self::MAP_COUNT_KEY);
 
+        return $mapId;
     }
 }
