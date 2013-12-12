@@ -29,4 +29,9 @@ class CreateMapSpec extends ObjectBehavior
     {
         $this->getName()->shouldReturn($this->mapName);
     }
+
+    function it_should_be_json_serializable()
+    {
+        $this->toJson()->shouldReturn('{"type":"CreateMap","name":"Test map"}');
+    }
 }

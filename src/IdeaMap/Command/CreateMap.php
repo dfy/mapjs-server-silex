@@ -33,4 +33,14 @@ class CreateMap extends Command
     {
         return $this->name;
     }
+
+    /**
+     *  @return string
+     */
+    public function toJson()
+    {
+        return json_encode(
+            (object) array('type' => 'CreateMap', 'name' => $this->name)
+        );
+    }
 }
