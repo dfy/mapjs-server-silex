@@ -19,14 +19,17 @@ class MapRepositorySpec extends ObjectBehavior
         $this->shouldHaveType('IdeaMap\Predis\MapRepository');
     }
 
-    function it_should_save_a_new_map(Client $client, CreateMap $cmd)
+    function it_should_save_a_new_map(Client $client)
     {
+        $cmdData = array('type' => 'CreateMap', 'name' => 'Test map');
+        $cmdJson = json_encode((object) $cmdData);
+
+        unset($cmdData['type']);
+        $cmd = new CreateMap($cmdData);
+
         $client->incr('ideamap:count:map')->shouldBeCalled()->willReturn(1);
-        //$client->incr('ideamap:count:map')->shouldBeCalled()->willReturn(1);
+        $client->lpush('ideamap:map1:incoming', $cmdJson)->shouldBeCalled();
 
         $this->create($cmd);
     }
-
-    // $user_id = $redis->incr('user:id');
-    // $client->hmset('metavars', array('foo' => 'bar', 'hoge' => 'piyo', 'lol' => 'wut'));
 }
