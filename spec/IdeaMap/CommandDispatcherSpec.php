@@ -6,37 +6,38 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use IdeaMap\Command\CreateMap;
 use IdeaMap\CommandProcess;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CommandDispatcherSpec extends ObjectBehavior
 {
-    private $eventPrefix = 'eventPrefix.';
-
-    function let(EventDispatcherInterface $dispatcher)
-    {
-        $this->beConstructedWith($dispatcher, $this->eventPrefix);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('IdeaMap\CommandDispatcher');
     }
 
-    function it_registers_a_command_listener_with_the_event_prefix(CommandProcess $process, $dispatcher)
+    function it_notifies_a_registered_listener(CommandProcess $process)
     {
-        $eventName = $this->eventPrefix . CreateMap::TYPE;
-        $dispatcher->addListener($eventName, array($process, 'execute'))->shouldBeCalled();
+        $cmd = new CreateMap(array('name' => 'Test name'));
 
-        $this->addListener(CreateMap::TYPE, $process);
+        $process->execute($cmd)->shouldBeCalled();
+
+        $this->addListener(CreateMap::TYPE, $process)->dispatch($cmd);
     }
 
-    function it_registers_a_command_listener_without_the_event_prefix(CommandProcess $process, $dispatcher)
+    function it_does_not_register_a_listener_with_an_invalid_type(CommandProcess $process)
     {
-        $this->beConstructedWith($dispatcher);
+        $cmd = new CreateMap(array('name' => 'Test name'));
 
-        $eventName = CreateMap::TYPE;
-        $dispatcher->addListener($eventName, array($process, 'execute'))->shouldBeCalled();
+        $ex = new \InvalidArgumentException('Type parameter should be non-empty string');
 
-        $this->addListener(CreateMap::TYPE, $process);
+        $this->shouldThrow($ex)->duringAddListener(new \stdClass, $process);
+    }
+
+    function it_does_not_notify_anything_if_no_listeners_exist()
+    {
+        $cmd = new CreateMap(array('name' => 'Test name'));
+
+        $ex = new \OutOfRangeException('No listeners found for command ' . $cmd::TYPE);
+
+        $this->shouldThrow($ex)->duringDispatch($cmd);
     }
 }
