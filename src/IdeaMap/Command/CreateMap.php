@@ -9,6 +9,8 @@ namespace IdeaMap\Command;
  */
 class CreateMap extends Command
 {
+    const TYPE = 'CreateMap';
+
     /**
      *  @var string
      */
