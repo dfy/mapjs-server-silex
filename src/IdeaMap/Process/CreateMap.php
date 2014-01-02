@@ -2,7 +2,7 @@
 
 namespace IdeaMap\Process;
 
-use IdeaMap\CommandProcess;
+use SimpleCommand\CommandProcess;
 use IdeaMap\Command\Command;
 use IdeaMap\Command\CreateMap as CreateMapCommand;
 use IdeaMap\MapRepository;

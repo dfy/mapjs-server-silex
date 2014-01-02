@@ -1,6 +1,6 @@
 <?php
 
-namespace IdeaMap;
+namespace SimpleCommand;
 
 class CommandSerializer
 {

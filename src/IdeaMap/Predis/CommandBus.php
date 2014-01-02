@@ -2,7 +2,7 @@
 
 namespace IdeaMap\Predis;
 
-use IdeaMap\CommandBus as CommandBusInterface;
+use SimpleCommand\CommandBus as CommandBusInterface;
 use IdeaMap\Command\Command;
 
 class CommandBus implements CommandBusInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\IdeaMap;
+namespace spec\SimpleCommand;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -9,7 +9,7 @@ class CommandSerializerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('IdeaMap\CommandSerializer');
+        $this->shouldHaveType('SimpleCommand\CommandSerializer');
     }
 
     function it_should_create_a_command_based_on_the_given_type_string()

@@ -1,17 +1,17 @@
 <?php
 
-namespace spec\IdeaMap;
+namespace spec\SimpleCommand;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use IdeaMap\Command\CreateMap;
-use IdeaMap\CommandProcess;
+use SimpleCommand\CommandProcess;
 
 class CommandDispatcherSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('IdeaMap\CommandDispatcher');
+        $this->shouldHaveType('SimpleCommand\CommandDispatcher');
     }
 
     function it_notifies_a_registered_listener(CommandProcess $process)
