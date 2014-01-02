@@ -2,7 +2,7 @@
 
 namespace SimpleCommand;
 
-use IdeaMap\Command\Command;
+use SimpleCommand\Command;
 
 interface CommandBus
 {

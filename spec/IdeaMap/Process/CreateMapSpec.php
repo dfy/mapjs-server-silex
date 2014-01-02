@@ -6,7 +6,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 use IdeaMap\MapRepository;
-use IdeaMap\Command\Command;
+use SimpleCommand\Command;
 use IdeaMap\Command\CreateMap as CreateMapCommand;
 
 class CreateMapSpec extends ObjectBehavior

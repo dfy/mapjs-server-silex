@@ -3,7 +3,7 @@
 namespace IdeaMap\Process;
 
 use SimpleCommand\CommandProcess;
-use IdeaMap\Command\Command;
+use SimpleCommand\Command;
 use IdeaMap\Command\CreateMap as CreateMapCommand;
 use IdeaMap\MapRepository;
 

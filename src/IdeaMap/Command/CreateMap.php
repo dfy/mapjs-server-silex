@@ -4,10 +4,12 @@
 
 namespace IdeaMap\Command;
 
+use SimpleCommand\Command;
+
 /**
  *  Command for creating a new map
  */
-class CreateMap extends Command
+class CreateMap implements Command
 {
     const TYPE = 'CreateMap';
 
