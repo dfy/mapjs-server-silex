@@ -8,5 +8,5 @@ interface CommandBus
 {
     public function storeIncoming(Command $command);
 
-    public function storeIncomingAndNotify(Command $command);
+    public function notify(Command $command);
 }
