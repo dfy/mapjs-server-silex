@@ -15,7 +15,7 @@ class Client
 
     public function incr($key)
     {
-        $this->predisClient->incr($key);
+        return $this->predisClient->incr($key);
     }
 
     public function lpush($key, $value)
