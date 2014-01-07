@@ -28,7 +28,7 @@ class MapRepositorySpec extends ObjectBehavior
         $cmd = new CreateMap($cmdData);
 
         $client->incr('ideamap:count:map')->shouldBeCalled()->willReturn(1);
-        $client->lpush('ideamap:map1:incoming', $cmdJson)->shouldBeCalled();
+        $client->rpush('ideamap:map1:processed', $cmdJson)->shouldBeCalled();
 
         $this->create($cmd);
     }

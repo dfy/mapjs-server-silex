@@ -22,4 +22,9 @@ class Client
     {
         $this->predisClient->lpush($key, $value);
     }
+
+    public function rpush($key, $value)
+    {
+        $this->predisClient->rpush($key, $value);
+    }
 }

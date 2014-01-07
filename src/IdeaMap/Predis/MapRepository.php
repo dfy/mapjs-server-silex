@@ -11,6 +11,8 @@ class MapRepository implements MapRepositoryInterface
 
     const MAP_INCOMING_KEY = 'ideamap:map%d:incoming';
 
+    const MAP_PROCESSED_KEY = 'ideamap:map%d:processed';
+
     /**
      *  @var IdeaMap\Predis\Client
      */
@@ -31,8 +33,8 @@ class MapRepository implements MapRepositoryInterface
     public function create(CreateMap $cmd)
     {
         $mapId = $this->client->incr(self::MAP_COUNT_KEY);
-        $this->client->lpush(
-            sprintf(self::MAP_INCOMING_KEY, $mapId),
+        $this->client->rpush(
+            sprintf(self::MAP_PROCESSED_KEY, $mapId),
             $cmd->toJson()
         );
 
