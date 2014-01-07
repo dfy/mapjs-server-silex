@@ -1,6 +1,9 @@
 {
     "autoload": {
-        "psr-0": {"IdeaMap": "src/"}
+        "psr-0": {
+            "IdeaMap": "src/",
+            "SimpleCommand": "src/"
+        }
     },
     "require": {
         "silex/silex": "~1.1",
