@@ -27,4 +27,9 @@ class Client
     {
         $this->predisClient->rpush($key, $value);
     }
+
+    public function lrange($key, $start, $end)
+    {
+        return $this->predisClient->lrange($key, $start, $end);
+    }
 }

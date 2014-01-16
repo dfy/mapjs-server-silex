@@ -4,6 +4,7 @@ namespace IdeaMap\Predis;
 
 use IdeaMap\MapRepository as MapRepositoryInterface;
 use IdeaMap\Command\CreateMap;
+use SimpleCommand\CommandSerializer;
 
 class MapRepository implements MapRepositoryInterface
 {
@@ -18,12 +19,16 @@ class MapRepository implements MapRepositoryInterface
      */
     protected $client;
 
+    protected $serializer;
+
     /**
      *  @param IdeaMap\Predis\Client $client
+     *  @param SimpleCommand\CommandSerializer $serializer
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, CommandSerializer $serializer)
     {
         $this->client = $client;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -39,5 +44,21 @@ class MapRepository implements MapRepositoryInterface
         );
 
         return $mapId;
+    }
+
+    public function eventList($mapId)
+    {
+        $rawData = $this->client->lrange(
+            sprintf(self::MAP_PROCESSED_KEY, $mapId),
+            0,
+            99999
+        );
+
+        $cmds = array();
+        foreach ($rawData as $rawDatum) {
+            $cmds[] = $this->serializer->jsonDecode($rawDatum);
+        }
+
+        return $cmds;
     }
 }

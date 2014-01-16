@@ -2,6 +2,7 @@
 
 namespace SimpleCommand;
 
+// @TODO need to make this an interface, and implement it in the IdeaMap namespace
 class CommandSerializer
 {
     /**
