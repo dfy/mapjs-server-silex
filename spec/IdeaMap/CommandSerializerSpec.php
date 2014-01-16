@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\SimpleCommand;
+namespace spec\IdeaMap;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;

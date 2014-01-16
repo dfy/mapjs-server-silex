@@ -6,7 +6,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use IdeaMap\Predis\Client;
 use IdeaMap\Command\CreateMap;
-use SimpleCommand\CommandSerializer;
+use IdeaMap\CommandSerializer;
 
 class MapRepositorySpec extends ObjectBehavior
 {
