@@ -2,7 +2,7 @@
 
 namespace IdeaMap\Command;
 
-class AddIdeaToMap
+class AddIdeaToMap implements \JsonSerializable
 {
     const TYPE = 'AddIdeaToMap';
 
@@ -38,5 +38,10 @@ class AddIdeaToMap
         return json_encode(
             (object) array('type' => self::TYPE, 'id' => $this->id, 'parentId' => $this->parentId)
         );
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->toJson();
     }
 }
