@@ -27,6 +27,12 @@ class FeatureContext extends BehatContext
 
     protected $lastName;
 
+    protected $predis;
+
+    protected $mapRepository;
+
+    protected $mapId;
+
     /**
      * Initializes context.
      * Every scenario gets its own context object.
@@ -37,6 +43,26 @@ class FeatureContext extends BehatContext
     {
         // Initialize your context here
         $this->browser = new Browser();
+
+        $redisParams = array(
+            'host'     => '127.0.0.1',
+            'port'     => 6379,
+            'database' => 2
+        );
+
+        $this->predis = new Predis\Client($redisParams);
+        $this->mapRepository = new IdeaMap\Predis\MapRepository(
+            new IdeaMap\Predis\Client($this->predis),
+            new IdeaMap\CommandSerializer()
+        );
+    }
+
+    /**
+     * @BeforeScenario
+     */
+    public function cleanDB()//(ScenarioEvent $event)
+    {
+        $this->predis->flushDb();
     }
 
     /**
@@ -102,5 +128,51 @@ class FeatureContext extends BehatContext
     public function iShouldBeNotifiedAboutTheMapCreationSuccess()
     {
         throw new PendingException();
+    }
+
+    /**
+     * @Given /^the "([^"]*)" idea map exists$/
+     */
+    public function theIdeaMapExists($mapName)
+    {
+        // do this via the app api, like in iCreateTheIdeaMap?
+
+        $createCommand = new \IdeaMap\Command\CreateMap(
+            array('name' => $mapName)
+        );
+        $this->mapId = $this->mapRepository->create($createCommand);
+    }
+
+    /**
+     * @When /^I submit an idea$/
+     */
+    public function iSubmitAnIdea()
+    {
+        $data = new stdClass();
+        $data->commands = array(
+            new \IdeaMap\Command\AddIdeaToMap(array(
+                'id' => 9,
+                'parentId' => null
+            ))
+        );
+
+        $this->browser->post(
+            $this->baseUrl . '/map/' . $this->mapId,
+            array(), // not specifying any headers
+            json_encode($data)
+        );
+    }
+
+    /**
+     * @Then /^I should see the idea has been accepted for processing$/
+     */
+    public function iShouldSeeTheIdeaHasBeenAcceptedForProcessing()
+    {
+        $response = $this->browser->getLastResponse();
+
+        $code = $response->getStatusCode();
+        if ($code !== 202) {
+            throw new RuntimeException("Expected response code 202, got $code");
+        }
     }
 }
