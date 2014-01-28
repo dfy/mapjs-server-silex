@@ -175,20 +175,29 @@ class FeatureContext extends BehatContext
      */
     public function iShouldEventuallySeeTheIdeaHasBeenSaved()
     {
-        $response = $this->browser->get($this->baseUrl . '/map-events/' . $this->mapId);
+        for ($i = 0; $i < 3; ++$i) {
+            $response = $this->browser->get($this->baseUrl . '/map-events/' . $this->mapId);
 
-        $contentType = $response->getHeader('Content-Type');
-        $expectedContentType = 'text/event-stream; charset=UTF-8';
-        if ($contentType != $expectedContentType) {
-            throw new \RuntimeException(
-                "Expected content type '$expectedContentType' but got '$contentType"
-            );
+            $contentType = $response->getHeader('Content-Type');
+            $expectedContentType = 'text/event-stream; charset=UTF-8';
+            if ($contentType != $expectedContentType) {
+                throw new \RuntimeException(
+                    "Expected content type '$expectedContentType' but got '$contentType"
+                );
+            }
+
+            $content = $response->getContent();
+            var_dump($content);
+
+            $lines = explode("\n", $content);
+            if (count($lines) == 4 && is_int(strpos($lines[3], 'AddIdeaToMap'))) {
+                return true;
+            }
+
+            sleep(1); // is there something in the behat api to wait?
         }
 
-        $content = $response->getContent();
-        var_dump($content);
-
-        throw new PendingException();
+        throw new RuntimeException('AddIdeaToMap event not reported');
     }
 
     /**
