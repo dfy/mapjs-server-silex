@@ -14,12 +14,27 @@ use IdeaMap\Process\CreateMap;
 use IdeaMap\Service\Map as MapService;
 use IdeaMap\CommandSerializer;
 
+// config
+
+$predisConfig = array(
+    'predis.parameters' => 'tcp://127.0.0.1:6379'
+);
+if ($_SERVER['SERVER_NAME'] == 'test.mapjs-server.local') {
+    $predisConfig = array(
+        'predis.parameters' => array(
+            'host'     => '127.0.0.1',
+            'port'     => 6379,
+            'database' => 2
+        )
+    );
+} // 'predis.options'    => array('profile' => '2.2')
+
+// dependencies
+
 $app = new Application();
 
-$app->register(new Predis\Silex\PredisServiceProvider()/*, array(
-    'predis.parameters' => 'tcp://127.0.0.1:6379',
-    'predis.options'    => array('profile' => '2.2'),
-)*/);
+$app->register(new Predis\Silex\PredisServiceProvider(), $predisConfig);
+
 $app['idea.cmdbus'] = $app->share(function() {
     return 'nom';
 });
@@ -41,6 +56,8 @@ $app['idea.service.map'] = $app->share(function() use ($app) {
         $app['idea.process.createmap']
     );
 });
+
+// routes
 
 $app->get('/', function() use ($app) {
     $predis = $app['predis']; // @var $predis Predis\Client
@@ -73,6 +90,10 @@ $app->get('/map/{id}', function(Silex\Application $app, $id) {
     ';
 });
 
+$app->post('/map/{id}', function(Request $request) {
+    return new Response($request->getContent(), 202);
+});
+
 $app->get('/map-events/{id}', function(Silex\Application $app, Request $request, $id) {
     $lastEventId = $request->headers->get('Last-Event-ID');
     $eventList = '';
@@ -101,5 +122,7 @@ $app->post('/api', function() {
 $app->get('/test', function() use ($app) {
     var_dump($app['idea.cmdbus']);die;
 });
+
+// end
 
 $app->run();
