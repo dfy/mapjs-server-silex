@@ -9,19 +9,12 @@ use Behat\Gherkin\Node\PyStringNode,
 use Buzz\Message\Request;
 use Buzz\Browser;
 
-//
-// Require 3rd-party libraries here:
-//
-//   require_once 'PHPUnit/Autoload.php';
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
-//
-
 /**
  * Features context.
  */
 class FeatureContext extends BehatContext
 {
-    protected $baseUrl = 'http://localhost:8989';
+    protected $baseUrl = 'http://test.mapjs-server.local:8989';
 
     protected $browser;
 
@@ -169,10 +162,62 @@ class FeatureContext extends BehatContext
     public function iShouldSeeTheIdeaHasBeenAcceptedForProcessing()
     {
         $response = $this->browser->getLastResponse();
+        //var_dump($response->getContent());
 
         $code = $response->getStatusCode();
         if ($code !== 202) {
             throw new RuntimeException("Expected response code 202, got $code");
+        }
+    }
+
+    /**
+     * @Then /^I should eventually see the idea has been saved$/
+     */
+    public function iShouldEventuallySeeTheIdeaHasBeenSaved()
+    {
+        $response = $this->browser->get($this->baseUrl . '/map-events/' . $this->mapId);
+
+        $contentType = $response->getHeader('Content-Type');
+        $expectedContentType = 'text/event-stream; charset=UTF-8';
+        if ($contentType != $expectedContentType) {
+            throw new \RuntimeException(
+                "Expected content type '$expectedContentType' but got '$contentType"
+            );
+        }
+
+        $content = $response->getContent();
+        var_dump($content);
+
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^the "([^"]*)" idea map does not exist$/
+     */
+    public function theIdeaMapDoesNotExist($arg1)
+    {
+        // id of map that doesn't exist
+        $this->mapId = 999;
+    }
+
+    /**
+     * @Then /^I should see a "([^"]*)" error$/
+     */
+    public function iShouldSeeAError($errorType)
+    {
+        $response = $this->browser->getLastResponse();
+        $code = $response->getStatusCode();
+
+        switch ($errorType) {
+
+            case 'map not found':
+                if ($code !== 404) {
+                    throw new RuntimeException("Expected response code 404, got $code");
+                }
+                break;
+
+            default:
+                throw new \RuntimeException("Undefined error type '$errorType'");
         }
     }
 }
