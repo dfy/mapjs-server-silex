@@ -16,7 +16,7 @@ class CommandDispatcherSpec extends ObjectBehavior
 
     function it_notifies_a_registered_listener(CommandProcess $process)
     {
-        $cmd = new CreateMap(array('name' => 'Test name'));
+        $cmd = new CreateMap(array('title' => 'Test name'));
 
         $process->execute($cmd)->shouldBeCalled();
 
@@ -25,7 +25,7 @@ class CommandDispatcherSpec extends ObjectBehavior
 
     function it_does_not_register_a_listener_with_an_invalid_type(CommandProcess $process)
     {
-        $cmd = new CreateMap(array('name' => 'Test name'));
+        $cmd = new CreateMap(array('title' => 'Test name'));
 
         $ex = new \InvalidArgumentException('Type parameter should be non-empty string');
 
@@ -34,7 +34,7 @@ class CommandDispatcherSpec extends ObjectBehavior
 
     function it_does_not_notify_anything_if_no_listeners_exist()
     {
-        $cmd = new CreateMap(array('name' => 'Test name'));
+        $cmd = new CreateMap(array('title' => 'Test name'));
 
         $ex = new \OutOfRangeException('No listeners found for command ' . $cmd::TYPE);
 

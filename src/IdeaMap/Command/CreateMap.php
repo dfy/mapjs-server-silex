@@ -16,26 +16,26 @@ class CreateMap implements Command
     /**
      *  @var string
      */
-    private $name;
+    private $title;
 
     /**
      *  @param array $values
      */
     public function __construct(array $values)
     {
-        if (isset($values['name'])) {
-            $this->name = $values['name'];
+        if (isset($values['title'])) {
+            $this->title = $values['title'];
         } else {
-            throw new \InvalidArgumentException('Name not found in values');
+            throw new \InvalidArgumentException('Title not found in values');
         }
     }
 
     /**
      *  @return string
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**
@@ -44,7 +44,7 @@ class CreateMap implements Command
     public function toJson()
     {
         return json_encode(
-            (object) array('type' => 'CreateMap', 'name' => $this->name)
+            (object) array('type' => 'CreateMap', 'title' => $this->title)
         );
     }
 }

@@ -7,11 +7,11 @@ use Prophecy\Argument;
 
 class CreateMapSpec extends ObjectBehavior
 {
-    private $mapName = 'Test map';
+    private $mapTitle = 'Test map';
 
     function let()
     {
-        $this->beConstructedWith(array('name' => $this->mapName));
+        $this->beConstructedWith(array('title' => $this->mapTitle));
     }
 
     function it_is_initializable_with_a_name()
@@ -21,17 +21,17 @@ class CreateMapSpec extends ObjectBehavior
 
     function it_is_not_initializable_without_a_name()
     {
-        $ex = new \InvalidArgumentException('Name not found in values');
+        $ex = new \InvalidArgumentException('Title not found in values');
         $this->shouldThrow($ex)->during('__construct', array(array()));
     }
 
     function it_should_give_its_name()
     {
-        $this->getName()->shouldReturn($this->mapName);
+        $this->getTitle()->shouldReturn($this->mapTitle);
     }
 
     function it_should_be_json_serializable()
     {
-        $this->toJson()->shouldReturn('{"type":"CreateMap","name":"Test map"}');
+        $this->toJson()->shouldReturn('{"type":"CreateMap","title":"Test map"}');
     }
 }

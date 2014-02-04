@@ -14,9 +14,9 @@ class CommandSerializerSpec extends ObjectBehavior
 
     function it_should_create_a_command_based_on_the_given_type_string()
     {
-        $name = 'Test map';
-        $json = json_encode(array('type' => 'CreateMap', 'name' => $name));
-        $cmd = new \IdeaMap\Command\CreateMap(array('name' => $name));
+        $title = 'Test map';
+        $json = json_encode(array('type' => 'CreateMap', 'title' => $title));
+        $cmd = new \IdeaMap\Command\CreateMap(array('title' => $title));
 
         $this->jsonDecode($json)->shouldBeLike($cmd);
     }
@@ -30,7 +30,7 @@ class CommandSerializerSpec extends ObjectBehavior
 
     function it_should_not_create_a_command_if_there_is_no_type()
     {
-        $json = json_encode(array('name' => 'Name'));
+        $json = json_encode(array('title' => 'Name'));
         $ex = new \InvalidArgumentException('Command type not given');
 
         $this->shouldThrow($ex)->duringJsonDecode($json);

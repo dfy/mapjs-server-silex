@@ -22,7 +22,7 @@ class MapRepositorySpec extends ObjectBehavior
 
     function it_should_save_a_new_map(Client $client)
     {
-        $cmdData = array('type' => 'CreateMap', 'name' => 'Test map');
+        $cmdData = array('type' => 'CreateMap', 'title' => 'Test map');
         $cmdJson = json_encode((object) $cmdData);
 
         unset($cmdData['type']);
@@ -36,10 +36,10 @@ class MapRepositorySpec extends ObjectBehavior
 
     function it_gets_the_event_list_for_a_map($client)
     {
-        $cmdName = 'Test map';
-        $cmdData = array('type' => 'CreateMap', 'name' => $cmdName);
+        $cmdTitle = 'Test map';
+        $cmdData = array('type' => 'CreateMap', 'title' => $cmdTitle);
         $cmdJson = json_encode((object) $cmdData);
-        $cmdObj = new CreateMap(array('name' => $cmdName));
+        $cmdObj = new CreateMap(array('title' => $cmdTitle));
 
         $client->lrange('ideamap:map1:processed', 0, 99999)
             ->shouldBeCalled()
