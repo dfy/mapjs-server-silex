@@ -5,7 +5,7 @@ namespace spec\IdeaMap\Command;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class AddIdeaToMapSpec extends ObjectBehavior
+class AddSubIdeaSpec extends ObjectBehavior
 {
     function let()
     {
@@ -14,7 +14,7 @@ class AddIdeaToMapSpec extends ObjectBehavior
 
     function it_is_initializable_with_an_id_and_parent_id()
     {
-        $this->shouldHaveType('IdeaMap\Command\AddIdeaToMap');
+        $this->shouldHaveType('IdeaMap\Command\AddSubIdea');
     }
 
     function it_is_not_initializable_without_a_parent_id()

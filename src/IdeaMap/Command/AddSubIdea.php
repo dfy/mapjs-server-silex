@@ -2,7 +2,7 @@
 
 namespace IdeaMap\Command;
 
-class AddIdeaToMap implements \JsonSerializable
+class AddSubIdea implements \JsonSerializable
 {
     const TYPE = 'AddIdeaToMap';
 
