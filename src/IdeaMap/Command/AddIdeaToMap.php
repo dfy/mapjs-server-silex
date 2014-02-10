@@ -10,17 +10,17 @@ class AddIdeaToMap implements \JsonSerializable
 
     protected $parentId;
 
-    public function __construct(array $values)
+    public function __construct($id, $parentId=null)
     {
-        if (!array_key_exists('id', $values) || is_null($values['id'])) {
-            throw new \InvalidArgumentException('ID not found in values');
+        if (!is_int($id)) {
+            throw new \InvalidArgumentException('Invalid ID parameter');
         }
-        if (!array_key_exists('parentId', $values)) {
-            throw new \InvalidArgumentException('Parent ID not found in values');
+        if (!is_int($parentId) && !is_null($parentId)) {
+            throw new \InvalidArgumentException('Invalid parent ID parameter');
         }
 
-        $this->id = $values['id'];
-        $this->parentId = $values['parentId'];
+        $this->id = $id;
+        $this->parentId = $parentId;
     }
 
     public function getId()

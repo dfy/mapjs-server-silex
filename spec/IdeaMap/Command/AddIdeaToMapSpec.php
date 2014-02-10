@@ -9,7 +9,7 @@ class AddIdeaToMapSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('id' => 2, 'parentId' => 1));
+        $this->beConstructedWith(2, 1);
     }
 
     function it_is_initializable_with_an_id_and_parent_id()
@@ -19,26 +19,26 @@ class AddIdeaToMapSpec extends ObjectBehavior
 
     function it_is_not_initializable_without_a_parent_id()
     {
-        $ex = new \InvalidArgumentException('Parent ID not found in values');
-        $this->shouldThrow($ex)->during('__construct', array(array('id' => 2)));
+        $ex = new \InvalidArgumentException('Invalid parent ID parameter');
+        $this->shouldThrow($ex)->during('__construct', array(2, '1'));
     }
 
     function it_is_not_initializable_without_an_id()
     {
-        $ex = new \InvalidArgumentException('ID not found in values');
-        $this->shouldThrow($ex)->during('__construct', array(array('parentId' => 1)));
+        $ex = new \InvalidArgumentException('Invalid ID parameter');
+        $this->shouldThrow($ex)->during('__construct', array('2', 1));
     }
 
     function it_is_initializable_with_a_null_parent_id()
     {
-        $ex = new \InvalidArgumentException('Parent ID not found in values');
-        $this->shouldNotThrow($ex)->during('__construct', array(array('id' => 2, 'parentId' => null)));
+        $ex = new \InvalidArgumentException('Invalid parent ID parameter');
+        $this->shouldNotThrow($ex)->during('__construct', array(2, null));
     }
 
     function it_is_not_initializable_with_a_null_id()
     {
-        $ex = new \InvalidArgumentException('ID not found in values');
-        $this->shouldThrow($ex)->during('__construct', array(array('id' => null, 'parentId' => 1)));
+        $ex = new \InvalidArgumentException('Invalid ID parameter');
+        $this->shouldThrow($ex)->during('__construct', array(null, 1));
     }
 
     function it_should_give_its_id()
