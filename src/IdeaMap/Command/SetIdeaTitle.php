@@ -8,17 +8,17 @@ class SetIdeaTitle
 
     protected $title;
 
-    public function __construct(array $values)
+    public function __construct($id, $title)
     {
-        if (!isset($values['id'])) {
-            throw new \InvalidArgumentException('ID not found in values');
+        if (!is_int($id)) {
+            throw new \InvalidArgumentException('Invalid ID parameter');
         }
-        if (!isset($values['title'])) {
-            throw new \InvalidArgumentException('Title not found in values');
+        if (!is_string($title)) {
+            throw new \InvalidArgumentException('Invalid title parameter');
         }
 
-        $this->id = $values['id'];
-        $this->title = $values['title'];
+        $this->id = $id;
+        $this->title = $title;
     }
 
     public function getId()

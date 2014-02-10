@@ -9,7 +9,7 @@ class SetIdeaTitleSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('id' => 2, 'title' => 'Test idea'));
+        $this->beConstructedWith(2, 'Test idea');
     }
 
     function it_is_initializable_with_an_id_and_a_title()
@@ -17,16 +17,16 @@ class SetIdeaTitleSpec extends ObjectBehavior
         $this->shouldHaveType('IdeaMap\Command\SetIdeaTitle');
     }
 
-    function it_is_not_initializable_without_an_id()
+    function it_is_not_initializable_without_a_valid_id()
     {
-        $ex = new \InvalidArgumentException('ID not found in values');
-        $this->shouldThrow($ex)->during('__construct', array(array('title' => 'Test idea')));
+        $ex = new \InvalidArgumentException('Invalid ID parameter');
+        $this->shouldThrow($ex)->during('__construct', array('2', 'Test idea'));
     }
 
     function it_is_not_initializable_without_a_title()
     {
-        $ex = new \InvalidArgumentException('Title not found in values');
-        $this->shouldThrow($ex)->during('__construct', array(array('id' => 2)));
+        $ex = new \InvalidArgumentException('Invalid title parameter');
+        $this->shouldThrow($ex)->during('__construct', array(2, 2));
     }
 
     function it_should_give_its_id()
