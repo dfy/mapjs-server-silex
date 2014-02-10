@@ -45,7 +45,12 @@ class AddIdeaToMap implements \JsonSerializable
     public function toJson()
     {
         return json_encode(
-            (object) array('type' => self::TYPE, 'id' => $this->id, 'parentId' => $this->parentId)
+            (object) array(
+                'type' => self::TYPE,
+                'id' => $this->id,
+                'title' => $this->title,
+                'parentId' => $this->parentId
+            )
         );
     }
 

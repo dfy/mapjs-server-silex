@@ -64,7 +64,7 @@ class AddIdeaToMapSpec extends ObjectBehavior
 
     function it_should_be_json_serializable()
     {
-        $this->toJson()->shouldReturn('{"type":"AddIdeaToMap","id":2,"parentId":1}');
+        $this->toJson()->shouldReturn('{"type":"AddIdeaToMap","id":2,"title":"Idea title","parentId":1}');
     }
 }
 
