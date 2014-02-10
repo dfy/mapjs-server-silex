@@ -11,7 +11,7 @@ class CreateMapSpec extends ObjectBehavior
 
     function let()
     {
-        $this->beConstructedWith(array('title' => $this->mapTitle));
+        $this->beConstructedWith($this->mapTitle);
     }
 
     function it_is_initializable_with_a_name()
@@ -21,8 +21,8 @@ class CreateMapSpec extends ObjectBehavior
 
     function it_is_not_initializable_without_a_name()
     {
-        $ex = new \InvalidArgumentException('Title not found in values');
-        $this->shouldThrow($ex)->during('__construct', array(array()));
+        $ex = new \InvalidArgumentException('Invalid title parameter');
+        $this->shouldThrow($ex)->during('__construct', array(999));
     }
 
     function it_should_give_its_name()

@@ -21,13 +21,13 @@ class CreateMap implements Command
     /**
      *  @param array $values
      */
-    public function __construct(array $values)
+    public function __construct($title)
     {
-        if (isset($values['title'])) {
-            $this->title = $values['title'];
-        } else {
-            throw new \InvalidArgumentException('Title not found in values');
+        if (!is_string($title)) {
+            throw new \InvalidArgumentException('Invalid title parameter');
         }
+
+        $this->title = $title;
     }
 
     /**

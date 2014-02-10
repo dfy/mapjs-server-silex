@@ -26,7 +26,7 @@ class Map
 
     public function create($name)
     {
-        $cmd = new CreateMapCommand(array('title' => $name));
+        $cmd = new CreateMapCommand($name);
         return $this->process->execute($cmd);
     }
 

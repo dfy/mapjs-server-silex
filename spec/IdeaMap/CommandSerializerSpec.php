@@ -16,7 +16,7 @@ class CommandSerializerSpec extends ObjectBehavior
     {
         $title = 'Test map';
         $json = json_encode(array('type' => 'CreateMap', 'title' => $title));
-        $cmd = new \IdeaMap\Command\CreateMap(array('title' => $title));
+        $cmd = new \IdeaMap\Command\CreateMap($title);
 
         $this->jsonDecode($json)->shouldBeLike($cmd);
     }

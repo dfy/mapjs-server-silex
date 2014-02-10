@@ -26,7 +26,7 @@ class MapSpec extends ObjectBehavior
     function it_creates_a_new_map_with_the_given_title($process)
     {
         $title = 'New map';
-        $cmd = new CreateMapCommand(array('title' => $title));
+        $cmd = new CreateMapCommand($title);
         $process->execute($cmd)->shouldBeCalled()->willReturn(1);
 
         $this->create($title)->shouldReturn(1);
@@ -35,7 +35,7 @@ class MapSpec extends ObjectBehavior
     function it_gets_the_event_list_for_a_map($repository)
     {
         $id = 1;
-        $list = array(new CreateMapCommand(array('title' => 'New map')));
+        $list = array(new CreateMapCommand('New map'));
         $repository->eventList($id)->shouldBeCalled()->willReturn($list);
 
         $this->eventList($id)->shouldReturn($list);

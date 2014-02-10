@@ -26,7 +26,7 @@ class MapRepositorySpec extends ObjectBehavior
         $cmdJson = json_encode((object) $cmdData);
 
         unset($cmdData['type']);
-        $cmd = new CreateMap($cmdData);
+        $cmd = new CreateMap('Test map');
 
         $client->incr('ideamap:count:map')->shouldBeCalled()->willReturn(1);
         $client->rpush('ideamap:map1:processed', $cmdJson)->shouldBeCalled();
@@ -39,7 +39,7 @@ class MapRepositorySpec extends ObjectBehavior
         $cmdTitle = 'Test map';
         $cmdData = array('type' => 'CreateMap', 'title' => $cmdTitle);
         $cmdJson = json_encode((object) $cmdData);
-        $cmdObj = new CreateMap(array('title' => $cmdTitle));
+        $cmdObj = new CreateMap($cmdTitle);
 
         $client->lrange('ideamap:map1:processed', 0, 99999)
             ->shouldBeCalled()

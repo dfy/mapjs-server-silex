@@ -26,8 +26,11 @@ class CommandSerializer implements CommandSerializerInterface
             throw new \InvalidArgumentException('Invalid command type given');
         }
 
-        unset($o->type);
+        switch ($o->type) {
+            case 'CreateMap':
+                $cmd = new $className($o->title);
+        }
 
-        return new $className((array) $o);
+        return $cmd;
     }
 }
