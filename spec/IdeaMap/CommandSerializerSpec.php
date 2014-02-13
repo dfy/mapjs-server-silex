@@ -44,6 +44,24 @@ class CommandSerializerSpec extends ObjectBehavior
         $this->shouldThrow($ex)->duringJsonDecode($json);
     }
 
+    function it_should_decode_an_add_subidea_command()
+    {
+        $data = array(
+            'type' => 'AddSubIdea',
+            'id' => 2,
+            'title' => 'New sub-idea',
+            'parentId' => 1
+        );
+        $json = json_encode($data);
+        $cmd = new \IdeaMap\Command\AddSubIdea(
+            $data['id'],
+            $data['title'],
+            $data['parentId']
+        );
+
+        $this->jsonDecode($json)->shouldBeLike($cmd);
+    }
+
     // it should not create a command if there is no type
     // it should not create a command if the type does not match a command
 }

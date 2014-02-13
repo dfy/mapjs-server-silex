@@ -9,4 +9,6 @@ interface MapRepository
     public function create(CreateMap $cmd);
 
     public function eventList($id);
+
+    public function append($mapId, $cmd);
 }

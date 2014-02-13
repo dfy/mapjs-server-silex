@@ -26,9 +26,18 @@ class CommandSerializer implements CommandSerializerInterface
             throw new \InvalidArgumentException('Invalid command type given');
         }
 
+        // TODO: replace with something more flexible...
         switch ($o->type) {
             case 'CreateMap':
                 $cmd = new $className($o->title);
+                break;
+
+            case 'AddSubIdea':
+                $cmd = new $className($o->id, $o->title, $o->parentId);
+                break;
+
+            default:
+                throw new \RuntimeException("Type {$o->type} could not be decoded");
         }
 
         return $cmd;

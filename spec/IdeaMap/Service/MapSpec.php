@@ -4,9 +4,10 @@ namespace spec\IdeaMap\Service;
 
 use IdeaMap\Process\CreateMap as CreateMapProcess;
 use IdeaMap\Command\CreateMap as CreateMapCommand;
-use IdeaMap\Command\AddIdeaToMap as AddIdeaToMapCommand;
+use IdeaMap\Command\AddSubIdea as AddSubIdeaCommand;
 
 use IdeaMap\MapRepository;
+use IdeaMap\CommandSerializer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -15,7 +16,8 @@ class MapSpec extends ObjectBehavior
 {
     function let(MapRepository $repository, CreateMapProcess $process)
     {
-        $this->beConstructedWith($repository, $process);
+        $serializer = new CommandSerializer();
+        $this->beConstructedWith($repository, $process, $serializer);
     }
 
     function it_is_initializable()
@@ -41,13 +43,11 @@ class MapSpec extends ObjectBehavior
         $this->eventList($id)->shouldReturn($list);
     }
 
-    function it_appends_a_single_command()
+    function it_appends_a_single_command($repository)
     {
-        $cmd = new AddIdeaToMapCommand(array(
-            'id' => 2,
-            'parentId' => 1
-        ));
-        // contentAggregate.addSubIdea = function (parentId, ideaTitle, optionalNewId) {
-        // so... need to add title to command parameters and rename to AddSubIdea
+        $cmd = new AddSubIdeaCommand(2, 'Idea title', 1);
+        $repository->append($cmd)->shouldBeCalled();
+
+        $this->append(json_encode($cmd));
     }
 }

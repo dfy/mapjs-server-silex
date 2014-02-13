@@ -61,4 +61,12 @@ class MapRepository implements MapRepositoryInterface
 
         return $cmds;
     }
+
+    public function append($mapId, $cmd)
+    {
+        $this->client->rpush(
+            sprintf(self::MAP_INCOMING_KEY, $mapId),
+            json_encode($cmd)
+        );
+    }
 }

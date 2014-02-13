@@ -6,6 +6,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use IdeaMap\Predis\Client;
 use IdeaMap\Command\CreateMap;
+use IdeaMap\Command\AddSubIdea;
 use IdeaMap\CommandSerializer;
 
 class MapRepositorySpec extends ObjectBehavior
@@ -50,5 +51,17 @@ class MapRepositorySpec extends ObjectBehavior
         if ($list != array($cmdObj)) {
             throw new \RuntimeException('Returned list does not match expected list');
         }
+    }
+
+    function it_appends_a_single_command($client)
+    {
+        $mapId = 1;
+        $cmd = new AddSubIdea(2, 'A sub-idea', 1);
+
+        $client
+            ->rpush('ideamap:map1:incoming', json_encode($cmd))
+            ->shouldBeCalled();
+
+        $this->append($mapId, $cmd);
     }
 }
