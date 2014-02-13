@@ -53,7 +53,8 @@ $app['idea.process.createmap'] = $app->share(function() use ($app) {
 $app['idea.service.map'] = $app->share(function() use ($app) {
     return new MapService(
         $app['idea.repository'],
-        $app['idea.process.createmap']
+        $app['idea.process.createmap'],
+        $app['idea.commandserializer']
     );
 });
 
@@ -101,7 +102,7 @@ $app->get('/map-events/{id}', function(Silex\Application $app, Request $request,
     if (is_null($lastEventId)) {
         foreach ($app['idea.service.map']->eventList($id) as $cmd) {
             $eventList .= 'id: 1' . "\n";
-            $eventList .= 'data: ' . $cmd->toJson() . "\n\n";
+            $eventList .= 'data: ' . json_encode($cmd) . "\n\n";
         }
     } else if ($lastEventId === 1) {
         $eventList .= 'id: 2' . "\n";
