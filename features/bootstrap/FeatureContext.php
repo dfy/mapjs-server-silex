@@ -130,9 +130,7 @@ class FeatureContext extends BehatContext
     {
         // do this via the app api, like in iCreateTheIdeaMap?
 
-        $createCommand = new \IdeaMap\Command\CreateMap(
-            array('name' => $mapName)
-        );
+        $createCommand = new \IdeaMap\Command\CreateMap($mapName);
         $this->mapId = $this->mapRepository->create($createCommand);
     }
 
@@ -143,10 +141,7 @@ class FeatureContext extends BehatContext
     {
         $data = new stdClass();
         $data->commands = array(
-            new \IdeaMap\Command\AddIdeaToMap(array(
-                'id' => 9,
-                'parentId' => null
-            ))
+            new \IdeaMap\Command\AddSubIdea(9, 'A sub-idea', null)
         );
 
         $this->browser->post(
@@ -190,14 +185,14 @@ class FeatureContext extends BehatContext
             var_dump($content);
 
             $lines = explode("\n", $content);
-            if (count($lines) == 4 && is_int(strpos($lines[3], 'AddIdeaToMap'))) {
+            if (count($lines) == 4 && is_int(strpos($lines[3], 'AddSubIdea'))) {
                 return true;
             }
 
             sleep(1); // is there something in the behat api to wait?
         }
 
-        throw new RuntimeException('AddIdeaToMap event not reported');
+        throw new RuntimeException('AddSubIdea event not reported');
     }
 
     /**
