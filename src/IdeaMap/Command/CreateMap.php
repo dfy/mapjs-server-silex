@@ -4,12 +4,12 @@
 
 namespace IdeaMap\Command;
 
-use SimpleCommand\Command;
+use IdeaMap\Command as IdeaMapCommand;
 
 /**
  *  Command for creating a new map
  */
-class CreateMap implements Command
+class CreateMap implements IdeaMapCommand
 {
     const TYPE = 'CreateMap';
 
@@ -39,12 +39,10 @@ class CreateMap implements Command
     }
 
     /**
-     *  @return string
+     *  @return object
      */
-    public function toJson()
+    public function jsonSerialize()
     {
-        return json_encode(
-            (object) array('type' => 'CreateMap', 'title' => $this->title)
-        );
+        return (object) array('type' => 'CreateMap', 'title' => $this->title);
     }
 }

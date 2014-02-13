@@ -38,4 +38,15 @@ class SetIdeaTitleSpec extends ObjectBehavior
     {
         $this->getTitle()->shouldReturn('Test idea');
     }
+
+    function it_should_be_serializable()
+    {
+        $serializable = (object) array(
+            'type' => 'SetIdeaTitle',
+            'id' => 2,
+            'title' => 'Test idea'
+        );
+
+        $this->jsonSerialize()->shouldBeLike($serializable);
+    }
 }

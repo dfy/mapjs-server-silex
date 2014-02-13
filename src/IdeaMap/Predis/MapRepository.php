@@ -40,7 +40,7 @@ class MapRepository implements MapRepositoryInterface
         $mapId = $this->client->incr(self::MAP_COUNT_KEY);
         $this->client->rpush(
             sprintf(self::MAP_PROCESSED_KEY, $mapId),
-            $cmd->toJson()
+            $this->serializer->serialize($cmd)
         );
 
         return $mapId;
@@ -66,7 +66,7 @@ class MapRepository implements MapRepositoryInterface
     {
         $this->client->rpush(
             sprintf(self::MAP_INCOMING_KEY, $mapId),
-            json_encode($cmd)
+            $this->serializer->serialize($cmd)
         );
     }
 }

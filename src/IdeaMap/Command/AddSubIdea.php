@@ -2,7 +2,9 @@
 
 namespace IdeaMap\Command;
 
-class AddSubIdea implements \JsonSerializable
+use IdeaMap\Command as IdeaMapCommand;
+
+class AddSubIdea implements IdeaMapCommand
 {
     const TYPE = 'AddSubIdea';
 
@@ -40,18 +42,6 @@ class AddSubIdea implements \JsonSerializable
     public function getParentId()
     {
         return $this->parentId;
-    }
-
-    public function toJson()
-    {
-        return json_encode(
-            (object) array(
-                'type' => self::TYPE,
-                'id' => $this->id,
-                'title' => $this->title,
-                'parentId' => $this->parentId
-            )
-        );
     }
 
     public function jsonSerialize()

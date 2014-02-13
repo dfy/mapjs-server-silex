@@ -2,8 +2,12 @@
 
 namespace IdeaMap\Command;
 
-class SetIdeaTitle
+use IdeaMap\Command as IdeaMapCommand;
+
+class SetIdeaTitle implements IdeaMapCommand
 {
+    const TYPE = 'SetIdeaTitle';
+
     protected $id;
 
     protected $title;
@@ -29,5 +33,14 @@ class SetIdeaTitle
     public function getTitle()
     {
         return $this->title;
+    }
+
+    public function jsonSerialize()
+    {
+        return (object) array(
+            'type' => self::TYPE,
+            'id' => $this->id,
+            'title' => $this->title
+        );
     }
 }

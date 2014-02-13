@@ -15,6 +15,8 @@ class AddSubIdeaSpec extends ObjectBehavior
     function it_is_initializable_with_an_id_and_parent_id()
     {
         $this->shouldHaveType('IdeaMap\Command\AddSubIdea');
+        $this->shouldHaveType('IdeaMap\Command');
+        $this->shouldHaveType('SimpleCommand\Command');
     }
 
     function it_is_not_initializable_without_a_parent_id()
@@ -62,9 +64,16 @@ class AddSubIdeaSpec extends ObjectBehavior
         $this->getParentId()->shouldReturn(1);
     }
 
-    function it_should_be_json_serializable()
+    function it_should_be_serializable()
     {
-        $this->toJson()->shouldReturn('{"type":"AddSubIdea","id":2,"title":"Idea title","parentId":1}');
+        $serializable = (object) array(
+            'type' => 'AddSubIdea',
+            'id' => 2,
+            'title' => 'Idea title',
+            'parentId' => 1
+        );
+
+        $this->jsonSerialize()->shouldBeLike($serializable);
     }
 }
 

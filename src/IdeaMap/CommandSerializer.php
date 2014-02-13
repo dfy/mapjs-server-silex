@@ -3,6 +3,7 @@
 namespace IdeaMap;
 
 use SimpleCommand\CommandSerializer as CommandSerializerInterface;
+use SimpleCommand\Command as CommandInterface;
 
 class CommandSerializer implements CommandSerializerInterface
 {
@@ -41,5 +42,11 @@ class CommandSerializer implements CommandSerializerInterface
         }
 
         return $cmd;
+    }
+
+    public function serialize(CommandInterface $command)
+    {
+        // maybe Command::getSerializableData() and a trait to do the json bit - ?
+        return json_encode($command);
     }
 }
