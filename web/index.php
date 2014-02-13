@@ -65,11 +65,11 @@ $app->get('/', function() use ($app) {
 });
 
 $app->get('/create', function() {
-    return '<form method="post"><input type="text" name="name" /><input type="submit" value="submit" /></form>';
+    return '<form method="post"><input type="text" name="title" /><input type="submit" value="submit" /></form>';
 });
 
 $app->post('/create', function() use ($app) {
-    $id = $app['idea.service.map']->create($_POST['name']);
+    $id = $app['idea.service.map']->create($_POST['title']);
     return $app->redirect("/map/$id");
 });
 
@@ -116,7 +116,7 @@ $app->get('/map-events/{id}', function(Silex\Application $app, Request $request,
 
 
 $app->post('/api', function() {
-    return json_encode(array('id' => 123, 'name' => 'joe'));
+    return json_encode(array('id' => 123, 'title' => 'joe'));
 });
 
 $app->get('/test', function() use ($app) {
