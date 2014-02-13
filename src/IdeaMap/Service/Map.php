@@ -44,10 +44,8 @@ class Map
 
     public function append($data)
     {
-        $cmd = $this->serializer->jsonDecode($data);
-
         return $this->repository->append(
-            $this->serializer->jsonDecode($data)
+            $this->serializer->unserialize($data)
         );
     }
 }

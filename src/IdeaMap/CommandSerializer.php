@@ -7,12 +7,12 @@ use SimpleCommand\CommandSerializer as CommandSerializerInterface;
 class CommandSerializer implements CommandSerializerInterface
 {
     /**
-     *  @param string $json
+     *  @param string $data
      *  @return IdeaMap\Command\Command
      */
-    public function jsonDecode($json)
+    public function unserialize($data)
     {
-        $o = json_decode($json);
+        $o = json_decode($data);
         if (!is_object($o)) {
             throw new \InvalidArgumentException('Could not decode json string to object');
         }

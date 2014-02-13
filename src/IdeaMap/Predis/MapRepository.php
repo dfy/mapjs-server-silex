@@ -56,7 +56,7 @@ class MapRepository implements MapRepositoryInterface
 
         $cmds = array();
         foreach ($rawData as $rawDatum) {
-            $cmds[] = $this->serializer->jsonDecode($rawDatum);
+            $cmds[] = $this->serializer->unserialize($rawDatum);
         }
 
         return $cmds;

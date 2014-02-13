@@ -5,8 +5,8 @@ namespace SimpleCommand;
 interface CommandSerializer
 {
     /**
-     *  @param string $json
+     *  @param string $data
      *  @return SimpleCommand\Command
      */
-    public function jsonDecode($json);
+    public function unserialize($data);
 }

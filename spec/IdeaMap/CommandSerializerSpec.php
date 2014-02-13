@@ -18,14 +18,14 @@ class CommandSerializerSpec extends ObjectBehavior
         $json = json_encode(array('type' => 'CreateMap', 'title' => $title));
         $cmd = new \IdeaMap\Command\CreateMap($title);
 
-        $this->jsonDecode($json)->shouldBeLike($cmd);
+        $this->unserialize($json)->shouldBeLike($cmd);
     }
 
     function it_should_not_create_a_command_if_the_given_data_is_invalid()
     {
         $ex = new \InvalidArgumentException('Could not decode json string to object');
 
-        $this->shouldThrow($ex)->duringJsonDecode('not json');
+        $this->shouldThrow($ex)->duringUnserialize('not json');
     }
 
     function it_should_not_create_a_command_if_there_is_no_type()
@@ -33,7 +33,7 @@ class CommandSerializerSpec extends ObjectBehavior
         $json = json_encode(array('title' => 'Name'));
         $ex = new \InvalidArgumentException('Command type not given');
 
-        $this->shouldThrow($ex)->duringJsonDecode($json);
+        $this->shouldThrow($ex)->duringUnserialize($json);
     }
 
     function it_should_not_create_a_command_if_the_type_does_not_match_a_command()
@@ -41,7 +41,7 @@ class CommandSerializerSpec extends ObjectBehavior
         $json = json_encode(array('type' => 'InvalidCommand'));
         $ex = new \InvalidArgumentException('Invalid command type given');
 
-        $this->shouldThrow($ex)->duringJsonDecode($json);
+        $this->shouldThrow($ex)->duringUnserialize($json);
     }
 
     function it_should_decode_an_add_subidea_command()
@@ -59,7 +59,7 @@ class CommandSerializerSpec extends ObjectBehavior
             $data['parentId']
         );
 
-        $this->jsonDecode($json)->shouldBeLike($cmd);
+        $this->unserialize($json)->shouldBeLike($cmd);
     }
 
     // it should not create a command if there is no type
