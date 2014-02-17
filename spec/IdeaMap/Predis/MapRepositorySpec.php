@@ -21,7 +21,6 @@ class MapRepositorySpec extends ObjectBehavior
         $this->shouldHaveType('IdeaMap\Predis\MapRepository');
     }
 
-    // TODO change to lpush
     function it_should_save_a_new_map(Client $client)
     {
         $cmdData = array('type' => 'CreateMap', 'title' => 'Test map');
@@ -31,7 +30,7 @@ class MapRepositorySpec extends ObjectBehavior
         $cmd = new CreateMap('Test map');
 
         $client->incr('ideamap:count:map')->shouldBeCalled()->willReturn(1);
-        $client->rpush('ideamap:map1:processed', $cmdJson)->shouldBeCalled();
+        $client->lpush('ideamap:map1:processed', $cmdJson)->shouldBeCalled();
 
         $this->create($cmd);
     }
@@ -56,14 +55,13 @@ class MapRepositorySpec extends ObjectBehavior
         }
     }
 
-    // TODO change to lpush
     function it_appends_a_single_command($client)
     {
         $mapId = 1;
         $cmd = new AddSubIdea(2, 'A sub-idea', 1);
 
         $client
-            ->rpush('ideamap:map1:incoming', json_encode($cmd))
+            ->lpush('ideamap:map1:incoming', json_encode($cmd))
             ->shouldBeCalled();
 
         $this->append($mapId, $cmd);

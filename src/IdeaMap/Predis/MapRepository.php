@@ -38,7 +38,7 @@ class MapRepository implements MapRepositoryInterface
     public function create(CreateMap $cmd)
     {
         $mapId = $this->client->incr(self::MAP_COUNT_KEY);
-        $this->client->rpush(
+        $this->client->lpush(
             sprintf(self::MAP_PROCESSED_KEY, $mapId),
             $this->serializer->serialize($cmd)
         );
@@ -64,7 +64,7 @@ class MapRepository implements MapRepositoryInterface
 
     public function append($mapId, $cmd)
     {
-        $this->client->rpush(
+        $this->client->lpush(
             sprintf(self::MAP_INCOMING_KEY, $mapId),
             $this->serializer->serialize($cmd)
         );
