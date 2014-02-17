@@ -28,6 +28,11 @@ class Client
         $this->predisClient->rpush($key, $value);
     }
 
+    public function lindex($key, $index)
+    {
+        $this->predisClient->lindex($key, $index);
+    }
+
     public function lrange($key, $start, $end)
     {
         return $this->predisClient->lrange($key, $start, $end);

@@ -21,6 +21,7 @@ class MapRepositorySpec extends ObjectBehavior
         $this->shouldHaveType('IdeaMap\Predis\MapRepository');
     }
 
+    // TODO change to lpush
     function it_should_save_a_new_map(Client $client)
     {
         $cmdData = array('type' => 'CreateMap', 'title' => 'Test map');
@@ -35,6 +36,7 @@ class MapRepositorySpec extends ObjectBehavior
         $this->create($cmd);
     }
 
+    // TODO include spec for more than one item in the list (which will be in reverse order)
     function it_gets_the_event_list_for_a_map($client)
     {
         $cmdTitle = 'Test map';
@@ -42,7 +44,8 @@ class MapRepositorySpec extends ObjectBehavior
         $cmdJson = json_encode((object) $cmdData);
         $cmdObj = new CreateMap($cmdTitle);
 
-        $client->lrange('ideamap:map1:processed', 0, 99999)
+        $client
+            ->lrange('ideamap:map1:processed', 0, 99999)
             ->shouldBeCalled()
             ->willReturn(array($cmdJson));
 
@@ -53,6 +56,7 @@ class MapRepositorySpec extends ObjectBehavior
         }
     }
 
+    // TODO change to lpush
     function it_appends_a_single_command($client)
     {
         $mapId = 1;
@@ -63,5 +67,18 @@ class MapRepositorySpec extends ObjectBehavior
             ->shouldBeCalled();
 
         $this->append($mapId, $cmd);
+    }
+
+    function it_fetches_a_single_command($client)
+    {
+        $mapId = 1;
+        $cmd = new AddSubIdea(2, 'A sub-idea', 1);
+
+        $client
+            ->lindex('ideamap:map1:incoming', -1)
+            ->shouldBeCalled()
+            ->willReturn(array(json_encode($cmd)));
+
+        $this->getNextCommand($mapId)->shouldBeLike($cmd);
     }
 }

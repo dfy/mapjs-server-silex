@@ -69,4 +69,18 @@ class MapRepository implements MapRepositoryInterface
             $this->serializer->serialize($cmd)
         );
     }
+
+    public function getNextCommand($mapId)
+    {
+        $rawData = $this->client->lindex(
+            sprintf(self::MAP_INCOMING_KEY, $mapId),
+            -1
+        );
+
+        if (is_array($rawData) && isset($rawData[0])) {
+            return $this->serializer->unserialize($rawData[0]);
+        } else {
+            return null;
+        }
+    }
 }
