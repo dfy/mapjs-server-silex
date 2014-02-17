@@ -69,7 +69,7 @@ class MapRepositorySpec extends ObjectBehavior
         $this->append($mapId, $cmd);
     }
 
-    function it_fetches_a_single_command($client)
+    function it_fetches_the_next_command($client)
     {
         $mapId = 1;
         $cmd = new AddSubIdea(2, 'A sub-idea', 1);
@@ -80,5 +80,18 @@ class MapRepositorySpec extends ObjectBehavior
             ->willReturn(array(json_encode($cmd)));
 
         $this->getNextCommand($mapId)->shouldBeLike($cmd);
+    }
+
+    function it_commits_the_next_command($client)
+    {
+        $mapId = 1;
+        $cmd = new AddSubIdea(2, 'A sub-idea', 1);
+
+        $client
+            ->rpoplpush('ideamap:map1:incoming', 'ideamap:map1:processed')
+            ->shouldBeCalled()
+            ->willReturn(array(json_encode($cmd)));
+
+        $this->commitNextCommand($mapId)->shouldBeLike($cmd);
     }
 }

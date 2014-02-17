@@ -11,4 +11,8 @@ interface MapRepository
     public function eventList($id);
 
     public function append($mapId, $cmd);
+
+    public function getNextCommand($mapId);
+
+    public function commitNextCommand($mapId);
 }

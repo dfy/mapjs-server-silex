@@ -37,4 +37,9 @@ class Client
     {
         return $this->predisClient->lrange($key, $start, $end);
     }
+
+    public function rpoplpush($fromKey, $toKey)
+    {
+        return $this->predisClient->rpoplpush($fromKey, $toKey);
+    }
 }

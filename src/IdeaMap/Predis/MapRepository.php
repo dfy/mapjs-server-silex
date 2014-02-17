@@ -83,4 +83,18 @@ class MapRepository implements MapRepositoryInterface
             return null;
         }
     }
+
+    public function commitNextCommand($mapId)
+    {
+        $rawData = $this->client->rpoplpush(
+            sprintf(self::MAP_INCOMING_KEY, $mapId),
+            sprintf(self::MAP_PROCESSED_KEY, $mapId)
+        );
+
+        if (is_array($rawData) && isset($rawData[0])) {
+            return $this->serializer->unserialize($rawData[0]);
+        } else {
+            return null;
+        }
+    }
 }
