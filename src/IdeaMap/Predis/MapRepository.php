@@ -68,10 +68,24 @@ class MapRepository implements MapRepositoryInterface
             sprintf(self::MAP_INCOMING_KEY, $mapId),
             $this->serializer->serialize($cmd)
         );
+
+        /*echo "\nappend\n";
+        var_dump($this->client->lrange(
+            sprintf(self::MAP_INCOMING_KEY, $mapId),
+            0,
+            99999
+        ));*/
     }
 
     public function getNextCommand($mapId)
     {
+        /*echo "\ngetNextCommand\n";
+        var_dump($this->client->lrange(
+            sprintf(self::MAP_INCOMING_KEY, $mapId),
+            0,
+            99999
+        ));*/
+
         $rawData = $this->client->lindex(
             sprintf(self::MAP_INCOMING_KEY, $mapId),
             -1

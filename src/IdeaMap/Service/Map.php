@@ -42,9 +42,12 @@ class Map
         return $this->repository->eventList($id);
     }
 
-    public function append($data)
+    public function append($mapId, $data)
     {
+        // make this an http request -> repo adapter
+
         return $this->repository->append(
+            $mapId,
             $this->serializer->unserialize($data)
         );
     }

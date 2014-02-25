@@ -30,7 +30,7 @@ class Client
 
     public function lindex($key, $index)
     {
-        $this->predisClient->lindex($key, $index);
+        return $this->predisClient->lindex($key, $index);
     }
 
     public function lrange($key, $start, $end)

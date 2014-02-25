@@ -45,9 +45,10 @@ class MapSpec extends ObjectBehavior
 
     function it_appends_a_single_command($repository)
     {
+        $mapId = 1;
         $cmd = new AddSubIdeaCommand(2, 'Idea title', 1);
-        $repository->append($cmd)->shouldBeCalled();
+        $repository->append($mapId, $cmd)->shouldBeCalled();
 
-        $this->append(json_encode($cmd));
+        $this->append($mapId, json_encode($cmd));
     }
 }

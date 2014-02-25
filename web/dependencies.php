@@ -8,7 +8,7 @@ use IdeaMap\Process\CreateMap;
 use IdeaMap\Service\Map as MapService;
 use IdeaMap\CommandSerializer;
 
-if (!$app) {
+if (!isset($app)) {
     $app = new Application();
 }
 

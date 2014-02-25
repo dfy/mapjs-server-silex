@@ -64,7 +64,11 @@ $app->get('/map/{id}', function(Silex\Application $app, $id) {
     ';
 });
 
-$app->post('/map/{id}', function(Request $request) {
+$app->post('/map/{id}', function(Request $request, $id) {
+    // {"commands":[{"type":"AddSubIdea","id":9,"title":"A sub-idea","parentId":null}]}
+    $data = json_decode($request->getContent());
+    $commands = $data->commands;
+    $app['idea.service.map']->append($id, $commands[0]);
     return new Response($request->getContent(), 202);
 });
 
