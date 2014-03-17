@@ -44,9 +44,9 @@ class FeatureContext extends BehatContext
         );
 
         $this->predis = new Predis\Client($redisParams);
-        $this->mapRepository = new IdeaMap\Predis\MapRepository(
-            new IdeaMap\Predis\Client($this->predis),
-            new IdeaMap\CommandSerializer()
+        $this->mapRepository = new IdeaMapApp\Predis\MapRepository(
+            new IdeaMapApp\Predis\Client($this->predis),
+            new IdeaMapApp\CommandSerializer()
         );
     }
 
@@ -130,7 +130,7 @@ class FeatureContext extends BehatContext
     {
         // do this via the app api, like in iCreateTheIdeaMap?
 
-        $createCommand = new \IdeaMap\Command\CreateMap($mapName);
+        $createCommand = new \IdeaMapApp\Command\CreateMap($mapName);
         $this->mapId = $this->mapRepository->create($createCommand);
     }
 
@@ -141,7 +141,7 @@ class FeatureContext extends BehatContext
     {
         $data = new stdClass();
         $data->commands = array(
-            new \IdeaMap\Command\AddSubIdea(9, 'A sub-idea', null)
+            new \IdeaMapApp\Command\AddSubIdea(9, 'A sub-idea', null)
         );
 
         $this->browser->post(

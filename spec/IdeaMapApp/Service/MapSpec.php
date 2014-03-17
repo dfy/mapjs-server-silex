@@ -1,13 +1,13 @@
 <?php
 
-namespace spec\IdeaMap\Service;
+namespace spec\IdeaMapApp\Service;
 
-use IdeaMap\Process\CreateMap as CreateMapProcess;
-use IdeaMap\Command\CreateMap as CreateMapCommand;
-use IdeaMap\Command\AddSubIdea as AddSubIdeaCommand;
+use IdeaMapApp\Process\CreateMap as CreateMapProcess;
+use IdeaMapApp\Command\CreateMap as CreateMapCommand;
+use IdeaMapApp\Command\AddSubIdea as AddSubIdeaCommand;
 
-use IdeaMap\MapRepository;
-use IdeaMap\CommandSerializer;
+use IdeaMapApp\MapRepository;
+use IdeaMapApp\CommandSerializer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -22,7 +22,7 @@ class MapSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('IdeaMap\Service\Map');
+        $this->shouldHaveType('IdeaMapApp\Service\Map');
     }
 
     function it_creates_a_new_map_with_the_given_title($process)

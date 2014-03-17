@@ -1,11 +1,11 @@
 <?php
 
-namespace IdeaMap\Process;
+namespace IdeaMapApp\Process;
 
 use SimpleCommand\CommandProcess;
 use SimpleCommand\Command;
-use IdeaMap\Command\CreateMap as CreateMapCommand;
-use IdeaMap\MapRepository;
+use IdeaMapApp\Command\CreateMap as CreateMapCommand;
+use IdeaMapApp\MapRepository;
 
 class CreateMap implements CommandProcess
 {

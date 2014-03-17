@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\IdeaMap\Command;
+namespace spec\IdeaMapApp\Command;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -14,7 +14,7 @@ class SetIdeaTitleSpec extends ObjectBehavior
 
     function it_is_initializable_with_an_id_and_a_title()
     {
-        $this->shouldHaveType('IdeaMap\Command\SetIdeaTitle');
+        $this->shouldHaveType('IdeaMapApp\Command\SetIdeaTitle');
     }
 
     function it_is_not_initializable_without_a_valid_id()

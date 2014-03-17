@@ -1,6 +1,6 @@
 <?php
 
-namespace IdeaMap;
+namespace IdeaMapApp;
 
 use SimpleCommand\CommandSerializer as CommandSerializerInterface;
 use SimpleCommand\Command as CommandInterface;
@@ -9,7 +9,7 @@ class CommandSerializer implements CommandSerializerInterface
 {
     /**
      *  @param string $data
-     *  @return IdeaMap\Command\Command
+     *  @return IdeaMapApp\Command\Command
      */
     public function unserialize($data)
     {
@@ -22,7 +22,7 @@ class CommandSerializer implements CommandSerializerInterface
             throw new \InvalidArgumentException('Command type not given');
         }
 
-        $className = 'IdeaMap\\Command\\' . $o->type;
+        $className = 'IdeaMapApp\\Command\\' . $o->type;
         if (!class_exists($className)) {
             throw new \InvalidArgumentException('Invalid command type given');
         }

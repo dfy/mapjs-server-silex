@@ -1,8 +1,8 @@
 <?php
 
-namespace IdeaMap\Command;
+namespace IdeaMapApp\Command;
 
-use IdeaMap\Command as IdeaMapCommand;
+use IdeaMapApp\Command as IdeaMapCommand;
 
 class AddSubIdea implements IdeaMapCommand
 {

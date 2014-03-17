@@ -2,11 +2,11 @@
 
 use Silex\Application;
 
-use IdeaMap\Predis\Client;
-use IdeaMap\Predis\MapRepository;
-use IdeaMap\Process\CreateMap;
-use IdeaMap\Service\Map as MapService;
-use IdeaMap\CommandSerializer;
+use IdeaMapApp\Predis\Client;
+use IdeaMapApp\Predis\MapRepository;
+use IdeaMapApp\Process\CreateMap;
+use IdeaMapApp\Service\Map as MapService;
+use IdeaMapApp\CommandSerializer;
 
 if (!isset($app)) {
     $app = new Application();

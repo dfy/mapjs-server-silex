@@ -1,13 +1,13 @@
 <?php
 
-namespace spec\IdeaMap\Predis;
+namespace spec\IdeaMapApp\Predis;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use IdeaMap\Predis\Client;
-use IdeaMap\Command\CreateMap;
-use IdeaMap\Command\AddSubIdea;
-use IdeaMap\CommandSerializer;
+use IdeaMapApp\Predis\Client;
+use IdeaMapApp\Command\CreateMap;
+use IdeaMapApp\Command\AddSubIdea;
+use IdeaMapApp\CommandSerializer;
 
 class MapRepositorySpec extends ObjectBehavior
 {
@@ -18,7 +18,7 @@ class MapRepositorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('IdeaMap\Predis\MapRepository');
+        $this->shouldHaveType('IdeaMapApp\Predis\MapRepository');
     }
 
     function it_should_save_a_new_map(Client $client)

@@ -1,8 +1,8 @@
 <?php
 
-namespace IdeaMap;
+namespace IdeaMapApp;
 
-use IdeaMap\Command\CreateMap;
+use IdeaMapApp\Command\CreateMap;
 
 interface MapRepository
 {

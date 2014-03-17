@@ -2,9 +2,9 @@
 /**
  */
 
-namespace IdeaMap\Command;
+namespace IdeaMapApp\Command;
 
-use IdeaMap\Command as IdeaMapCommand;
+use IdeaMapApp\Command as IdeaMapCommand;
 
 /**
  *  Command for creating a new map

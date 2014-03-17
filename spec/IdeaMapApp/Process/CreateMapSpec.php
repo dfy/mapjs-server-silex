@@ -1,13 +1,13 @@
 <?php
 
-namespace spec\IdeaMap\Process;
+namespace spec\IdeaMapApp\Process;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-use IdeaMap\MapRepository;
+use IdeaMapApp\MapRepository;
 use SimpleCommand\Command;
-use IdeaMap\Command\CreateMap as CreateMapCommand;
+use IdeaMapApp\Command\CreateMap as CreateMapCommand;
 
 class CreateMapSpec extends ObjectBehavior
 {
@@ -18,7 +18,7 @@ class CreateMapSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('IdeaMap\Process\CreateMap');
+        $this->shouldHaveType('IdeaMapApp\Process\CreateMap');
     }
 
     function it_saves_a_new_map(CreateMapCommand $cmd, $repository)

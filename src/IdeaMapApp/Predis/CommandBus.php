@@ -1,6 +1,6 @@
 <?php
 
-namespace IdeaMap\Predis;
+namespace IdeaMapApp\Predis;
 
 use SimpleCommand\CommandBus as CommandBusInterface;
 use SimpleCommand\Command;

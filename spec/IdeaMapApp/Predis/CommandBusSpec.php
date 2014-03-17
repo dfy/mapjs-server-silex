@@ -1,15 +1,15 @@
 <?php
 
-namespace spec\IdeaMap\Predis;
+namespace spec\IdeaMapApp\Predis;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use IdeaMap\Command\Command;
+use IdeaMapApp\Command\Command;
 
 class CommandBusSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('IdeaMap\Predis\CommandBus');
+        $this->shouldHaveType('IdeaMapApp\Predis\CommandBus');
     }
 }

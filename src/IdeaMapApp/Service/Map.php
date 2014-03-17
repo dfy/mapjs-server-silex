@@ -1,11 +1,11 @@
 <?php
 
-namespace IdeaMap\Service;
+namespace IdeaMapApp\Service;
 
-use IdeaMap\Process\CreateMap as CreateMapProcess;
-use IdeaMap\Command\CreateMap as CreateMapCommand;
-use IdeaMap\MapRepository;
-use IdeaMap\CommandSerializer;
+use IdeaMapApp\Process\CreateMap as CreateMapProcess;
+use IdeaMapApp\Command\CreateMap as CreateMapCommand;
+use IdeaMapApp\MapRepository;
+use IdeaMapApp\CommandSerializer;
 
 class Map
 {
