@@ -2,7 +2,7 @@
 /**
  */
 
-namespace IdeaMapApp;
+namespace IdeaMap;
 
 /**
  */
