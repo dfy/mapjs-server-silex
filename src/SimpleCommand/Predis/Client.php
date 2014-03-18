@@ -1,6 +1,6 @@
 <?php
 
-namespace IdeaMapApp\Predis;
+namespace SimpleCommand\Predis;
 
 use Predis\Client as PredisClient;
 

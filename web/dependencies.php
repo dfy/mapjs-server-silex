@@ -2,8 +2,8 @@
 
 use Silex\Application;
 
-use IdeaMapApp\Predis\Client;
-use IdeaMapApp\Predis\MapRepository;
+use SimpleCommand\Predis\Client;
+use SimpleCommand\Predis\MapRepository;
 use IdeaMapApp\Process\CreateMap;
 use IdeaMapApp\Service\Map as MapService;
 use IdeaMapApp\CommandSerializer;

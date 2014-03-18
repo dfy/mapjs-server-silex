@@ -1,6 +1,6 @@
 <?php
 
-namespace IdeaMapApp\Predis;
+namespace SimpleCommand\Predis;
 
 use IdeaMapApp\MapRepository as MapRepositoryInterface;
 use IdeaMapApp\Command\CreateMap;
@@ -15,14 +15,14 @@ class MapRepository implements MapRepositoryInterface
     const MAP_PROCESSED_KEY = 'ideamap:map%d:processed';
 
     /**
-     *  @var IdeaMapApp\Predis\Client
+     *  @var SimpleCommand\Predis\Client
      */
     protected $client;
 
     protected $serializer;
 
     /**
-     *  @param IdeaMapApp\Predis\Client $client
+     *  @param SimpleCommand\Predis\Client $client
      *  @param SimpleCommand\CommandSerializer $serializer
      */
     public function __construct(Client $client, CommandSerializer $serializer)

@@ -44,8 +44,8 @@ class FeatureContext extends BehatContext
         );
 
         $this->predis = new Predis\Client($redisParams);
-        $this->mapRepository = new IdeaMapApp\Predis\MapRepository(
-            new IdeaMapApp\Predis\Client($this->predis),
+        $this->mapRepository = new SimpleCommand\Predis\MapRepository(
+            new SimpleCommand\Predis\Client($this->predis),
             new IdeaMapApp\CommandSerializer()
         );
     }
