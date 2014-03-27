@@ -130,7 +130,7 @@ class FeatureContext extends BehatContext
     {
         // do this via the app api, like in iCreateTheIdeaMap?
 
-        $createCommand = new \IdeaMapApp\Command\CreateMap($mapName);
+        $createCommand = new \IdeaMap\Command\CreateMap($mapName);
         $this->mapId = $this->mapRepository->create($createCommand);
     }
 
@@ -141,7 +141,7 @@ class FeatureContext extends BehatContext
     {
         $data = new stdClass();
         $data->commands = array(
-            new \IdeaMapApp\Command\AddSubIdea(9, 'A sub-idea', null)
+            new \IdeaMap\Command\AddSubIdea(9, 'A sub-idea', null)
         );
 
         $this->browser->post(

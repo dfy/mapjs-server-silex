@@ -2,7 +2,7 @@
 
 namespace IdeaMapApp;
 
-use IdeaMapApp\Command\CreateMap;
+use IdeaMap\Command\CreateMap;
 
 interface MapRepository
 {

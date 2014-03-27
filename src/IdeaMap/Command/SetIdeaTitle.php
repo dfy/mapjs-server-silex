@@ -1,8 +1,8 @@
 <?php
 
-namespace IdeaMapApp\Command;
+namespace IdeaMap\Command;
 
-use IdeaMapApp\Command as IdeaMapCommand;
+use IdeaMap\Command as IdeaMapCommand;
 
 class SetIdeaTitle implements IdeaMapCommand
 {

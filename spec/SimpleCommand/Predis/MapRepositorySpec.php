@@ -5,8 +5,8 @@ namespace spec\SimpleCommand\Predis;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SimpleCommand\Predis\Client;
-use IdeaMapApp\Command\CreateMap;
-use IdeaMapApp\Command\AddSubIdea;
+use IdeaMap\Command\CreateMap;
+use IdeaMap\Command\AddSubIdea;
 use IdeaMapApp\CommandSerializer;
 
 class MapRepositorySpec extends ObjectBehavior

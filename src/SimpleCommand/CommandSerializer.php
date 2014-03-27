@@ -10,5 +10,5 @@ interface CommandSerializer
      */
     public function unserialize($data);
 
-    public function serialize(Command $command);
+    public function serialize($command);
 }

@@ -3,7 +3,7 @@
 namespace SimpleCommand\Predis;
 
 use IdeaMapApp\MapRepository as MapRepositoryInterface;
-use IdeaMapApp\Command\CreateMap;
+use IdeaMap\Command\CreateMap;
 use SimpleCommand\CommandSerializer;
 
 class MapRepository implements MapRepositoryInterface
@@ -32,7 +32,7 @@ class MapRepository implements MapRepositoryInterface
     }
 
     /**
-     *  @param IdeaMapApp\Command\CreateMap $cmd
+     *  @param IdeaMap\Command\CreateMap $cmd
      *  @return integer
      */
     public function create(CreateMap $cmd)

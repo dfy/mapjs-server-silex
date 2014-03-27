@@ -9,7 +9,7 @@ class CommandSerializer implements CommandSerializerInterface
 {
     /**
      *  @param string $data
-     *  @return IdeaMapApp\Command\Command
+     *  @return IdeaMap\Command\Command
      */
     public function unserialize($data)
     {
@@ -22,7 +22,7 @@ class CommandSerializer implements CommandSerializerInterface
             throw new \InvalidArgumentException('Command type not given');
         }
 
-        $className = 'IdeaMapApp\\Command\\' . $o->type;
+        $className = 'IdeaMap\\Command\\' . $o->type;
         if (!class_exists($className)) {
             throw new \InvalidArgumentException('Invalid command type given');
         }
@@ -44,9 +44,8 @@ class CommandSerializer implements CommandSerializerInterface
         return $cmd;
     }
 
-    public function serialize(CommandInterface $command)
+    public function serialize($command)
     {
-        // maybe Command::getSerializableData() and a trait to do the json bit - ?
         return json_encode($command);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\IdeaMapApp\Command;
+namespace spec\IdeaMap\Command;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -14,9 +14,8 @@ class AddSubIdeaSpec extends ObjectBehavior
 
     function it_is_initializable_with_an_id_and_parent_id()
     {
-        $this->shouldHaveType('IdeaMapApp\Command\AddSubIdea');
-        $this->shouldHaveType('IdeaMapApp\Command');
-        $this->shouldHaveType('SimpleCommand\Command');
+        $this->shouldHaveType('IdeaMap\Command\AddSubIdea');
+        $this->shouldHaveType('IdeaMap\Command');
     }
 
     function it_is_not_initializable_without_a_parent_id()

@@ -2,8 +2,6 @@
 
 namespace SimpleCommand;
 
-use SimpleCommand\Command;
-
 // rename to process executor?
 class CommandDispatcher
 {
@@ -24,7 +22,7 @@ class CommandDispatcher
         return $this;
     }
 
-    public function dispatch(Command $cmd)
+    public function dispatch($cmd)
     {
         $commandType = $cmd::TYPE;
 

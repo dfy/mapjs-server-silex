@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\IdeaMapApp\Command;
+namespace spec\IdeaMap\Command;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -16,7 +16,7 @@ class CreateMapSpec extends ObjectBehavior
 
     function it_is_initializable_with_a_name()
     {
-        $this->shouldHaveType('IdeaMapApp\Command\CreateMap');
+        $this->shouldHaveType('IdeaMap\Command\CreateMap');
     }
 
     function it_is_not_initializable_without_a_name()

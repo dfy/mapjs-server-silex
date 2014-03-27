@@ -4,7 +4,7 @@ namespace spec\SimpleCommand\Predis;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use IdeaMapApp\Command\Command;
+use IdeaMap\Command\Command;
 
 class CommandBusSpec extends ObjectBehavior
 {

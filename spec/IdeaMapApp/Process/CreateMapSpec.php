@@ -7,7 +7,7 @@ use Prophecy\Argument;
 
 use IdeaMapApp\MapRepository;
 use SimpleCommand\Command;
-use IdeaMapApp\Command\CreateMap as CreateMapCommand;
+use IdeaMap\Command\CreateMap as CreateMapCommand;
 
 class CreateMapSpec extends ObjectBehavior
 {

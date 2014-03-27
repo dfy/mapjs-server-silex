@@ -4,7 +4,7 @@ namespace spec\SimpleCommand;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use IdeaMapApp\Command\CreateMap;
+use IdeaMap\Command\CreateMap;
 use SimpleCommand\CommandProcess;
 
 class CommandDispatcherSpec extends ObjectBehavior

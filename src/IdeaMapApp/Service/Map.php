@@ -3,7 +3,7 @@
 namespace IdeaMapApp\Service;
 
 use IdeaMapApp\Process\CreateMap as CreateMapProcess;
-use IdeaMapApp\Command\CreateMap as CreateMapCommand;
+use IdeaMap\Command\CreateMap as CreateMapCommand;
 use IdeaMapApp\MapRepository;
 use IdeaMapApp\CommandSerializer;
 

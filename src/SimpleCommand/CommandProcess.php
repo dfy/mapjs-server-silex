@@ -2,9 +2,7 @@
 
 namespace SimpleCommand;
 
-use SimpleCommand\Command;
-
 interface CommandProcess 
 {
-    public function execute(Command $command);
+    public function execute($command);
 }

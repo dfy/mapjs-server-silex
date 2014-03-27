@@ -16,7 +16,7 @@ class CommandSerializerSpec extends ObjectBehavior
     {
         $title = 'Test map';
         $json = json_encode(array('type' => 'CreateMap', 'title' => $title));
-        $cmd = new \IdeaMapApp\Command\CreateMap($title);
+        $cmd = new \IdeaMap\Command\CreateMap($title);
 
         $this->unserialize($json)->shouldBeLike($cmd);
     }
@@ -53,7 +53,7 @@ class CommandSerializerSpec extends ObjectBehavior
             'parentId' => 1
         );
         $json = json_encode($data);
-        $cmd = new \IdeaMapApp\Command\AddSubIdea(
+        $cmd = new \IdeaMap\Command\AddSubIdea(
             $data['id'],
             $data['title'],
             $data['parentId']

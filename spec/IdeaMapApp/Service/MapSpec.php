@@ -3,8 +3,8 @@
 namespace spec\IdeaMapApp\Service;
 
 use IdeaMapApp\Process\CreateMap as CreateMapProcess;
-use IdeaMapApp\Command\CreateMap as CreateMapCommand;
-use IdeaMapApp\Command\AddSubIdea as AddSubIdeaCommand;
+use IdeaMap\Command\CreateMap as CreateMapCommand;
+use IdeaMap\Command\AddSubIdea as AddSubIdeaCommand;
 
 use IdeaMapApp\MapRepository;
 use IdeaMapApp\CommandSerializer;

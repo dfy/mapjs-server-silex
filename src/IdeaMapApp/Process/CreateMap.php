@@ -3,8 +3,7 @@
 namespace IdeaMapApp\Process;
 
 use SimpleCommand\CommandProcess;
-use SimpleCommand\Command;
-use IdeaMapApp\Command\CreateMap as CreateMapCommand;
+use IdeaMap\Command\CreateMap as CreateMapCommand;
 use IdeaMapApp\MapRepository;
 
 class CreateMap implements CommandProcess
@@ -17,7 +16,7 @@ class CreateMap implements CommandProcess
     }
 
     // shouldn't I be able to use CreateMapCommand as the param type?
-    public function execute(Command $cmd)
+    public function execute($cmd)
     {
         if (!$cmd instanceof CreateMapCommand) {
             throw new \InvalidArgumentException('Can only create on a CreateMap command');
