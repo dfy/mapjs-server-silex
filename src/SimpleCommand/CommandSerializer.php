@@ -6,7 +6,7 @@ interface CommandSerializer
 {
     /**
      *  @param string $data
-     *  @return SimpleCommand\Command
+     *  @return object
      */
     public function unserialize($data);
 

@@ -3,7 +3,6 @@
 namespace IdeaMapApp;
 
 use SimpleCommand\CommandSerializer as CommandSerializerInterface;
-use SimpleCommand\Command as CommandInterface;
 
 class CommandSerializer implements CommandSerializerInterface
 {

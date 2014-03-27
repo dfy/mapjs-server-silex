@@ -6,7 +6,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 use IdeaMapApp\MapRepository;
-use SimpleCommand\Command;
 use IdeaMap\Command\CreateMap as CreateMapCommand;
 
 class CreateMapSpec extends ObjectBehavior
@@ -28,7 +27,7 @@ class CreateMapSpec extends ObjectBehavior
         $this->execute($cmd)->shouldEqual(1);
     }
 
-    function it_does_not_save_anything_else(Command $cmd)
+    function it_does_not_save_anything_else($cmd)
     {
         $ex = new \InvalidArgumentException('Can only create on a CreateMap command');
         $this->shouldThrow($ex)->duringExecute($cmd);
