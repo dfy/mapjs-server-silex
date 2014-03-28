@@ -10,4 +10,4 @@ TODO
 
 * rewrite some of the code that converts HTTP requests into commands
 * implement a background script to process the commands
-** in particular, implement a read model that stores data in SSE format
+* in particular, implement a read model that stores data in SSE format
