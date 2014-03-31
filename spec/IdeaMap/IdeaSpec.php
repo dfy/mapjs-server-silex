@@ -39,4 +39,11 @@ class IdeaSpec extends ObjectBehavior
         $this->jsonSerialize()->ideas->shouldHaveCount(1);
         $this->jsonSerialize()->ideas[0]->shouldBeLike($childIdea);
     }
+
+    function its_title_can_be_updated()
+    {
+        $newTitle = 'A new title';
+        $this->updateTitle($newTitle);
+        $this->jsonSerialize()->title->shouldEqual($newTitle);
+    }
 }

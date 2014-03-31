@@ -31,4 +31,9 @@ class Idea implements \JsonSerializable
     {
         $this->children[] = $child;
     }
+
+    public function updateTitle($newTitle)
+    {
+        $this->title = $newTitle;
+    }
 }
