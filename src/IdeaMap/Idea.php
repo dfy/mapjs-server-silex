@@ -26,4 +26,9 @@ class Idea implements \JsonSerializable
             'ideas' => $this->children
         );
     }
+
+    public function addChild(Idea $child)
+    {
+        $this->children[] = $child;
+    }
 }
