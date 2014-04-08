@@ -36,4 +36,20 @@ class Idea implements \JsonSerializable
     {
         $this->title = $newTitle;
     }
+
+    public function find($id)
+    {
+        if ($this->id === $id) {
+            return $this;
+        }
+
+        foreach ($this->children as $child) {
+            $found = $child->find($id);
+            if ($found !== null) {
+                return $found;
+            }
+        }
+
+        return null;
+    }
 }

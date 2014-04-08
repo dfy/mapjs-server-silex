@@ -32,4 +32,22 @@ class CommandAdapterSpec extends ObjectBehavior
             new Idea(2, 'A Child Idea', [])
         );
     }
+
+    function it_accepts_new_children_of_children()
+    {
+        $this->addSubIdea(new AddSubIdea(2, 'A Child Idea', 1));
+        $this->jsonSerialize()->ideas->shouldHaveCount(1);
+
+        $this->addSubIdea(new AddSubIdea(3, 'Another Idea', 2));
+        $this->jsonSerialize()->ideas->shouldHaveCount(1);
+        $this->jsonSerialize()->ideas[0]->jsonSerialize()->ideas->shouldHaveCount(1);
+    }
+
+    function it_only_accepts_children_if_the_parent_exists()
+    {
+        $ex = new \InvalidArgumentException('Parent not found with ID 999');
+        $this->shouldThrow($ex)->duringAddSubIdea(
+            new AddSubIdea(2, 'A Child Idea', 999)
+        );
+    }
 }

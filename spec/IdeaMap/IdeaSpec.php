@@ -46,4 +46,23 @@ class IdeaSpec extends ObjectBehavior
         $this->updateTitle($newTitle);
         $this->jsonSerialize()->title->shouldEqual($newTitle);
     }
+
+    function it_finds_itself()
+    {
+        $this->find(1)->shouldEqual($this);
+    }
+
+    function it_finds_subideas()
+    {
+        $subIdea = new Idea(2, 'A Child Idea', array());
+
+        $this->addChild($subIdea);
+
+        $this->find(2)->shouldEqual($subIdea);
+    }
+
+    function it_only_finds_subideas_that_exist()
+    {
+        $this->find(999)->shouldEqual(null);
+    }
 }

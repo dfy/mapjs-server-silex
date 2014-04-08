@@ -16,8 +16,15 @@ class CommandAdapter
 
     public function addSubIdea(AddSubIdea $cmd)
     {
-        // TODO: search for parent rather than just adding to root
-        $this->rootIdea->addChild(
+        // TODO: maybe extract this logic to a finder
+        $parentId = $cmd->getParentId();
+        $parentIdea = $this->rootIdea->find($parentId);
+
+        if (!$parentIdea) {
+            throw new \InvalidArgumentException("Parent not found with ID $parentId");
+        }
+
+        $parentIdea->addChild(
             new IdeaMapIdea($cmd->getId(), $cmd->getTitle(), [])
         );
     }
