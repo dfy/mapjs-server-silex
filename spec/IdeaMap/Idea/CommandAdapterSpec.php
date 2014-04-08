@@ -7,6 +7,7 @@ use Prophecy\Argument;
 
 use IdeaMap\Idea;
 use IdeaMap\Command\AddSubIdea;
+use IdeaMap\Command\SetIdeaTitle;
 
 class CommandAdapterSpec extends ObjectBehavior
 {
@@ -45,9 +46,18 @@ class CommandAdapterSpec extends ObjectBehavior
 
     function it_only_accepts_children_if_the_parent_exists()
     {
-        $ex = new \InvalidArgumentException('Parent not found with ID 999');
+        $ex = new \InvalidArgumentException('Idea not found with ID 999');
         $this->shouldThrow($ex)->duringAddSubIdea(
             new AddSubIdea(2, 'A Child Idea', 999)
         );
+    }
+
+    function it_updates_the_title_of_the_root_idea()
+    {
+        $newTitle = 'A new title';
+        $this->setIdeaTitle(
+            new SetIdeaTitle(1, $newTitle)
+        );
+        $this->jsonSerialize()->title->shouldBe($newTitle);
     }
 }
