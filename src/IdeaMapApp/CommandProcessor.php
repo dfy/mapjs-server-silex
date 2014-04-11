@@ -4,20 +4,29 @@ namespace IdeaMapApp;
 
 use SimpleCommand\CommandList;
 use SimpleCommand\CommandDispatcher;
+use SimpleCommand\EventPublisher;
 
 class CommandProcessor
 {
     private $commandList;
     private $commandDispatcher;
-    private $eventDispatcher;
+    private $eventPublisher;
 
     public function __construct(
         CommandList $commandList,
         CommandDispatcher $commandDispatcher,
-        CommandDispatcher $eventDispatcher
+        EventPublisher $eventPublisher
     ) {
         $this->commandList = $commandList;
         $this->commandDispatcher = $commandDispatcher;
-        $this->eventDispatcher = $eventDispatcher;
+        $this->eventPublisher = $eventPublisher;
+    }
+
+    public function run()
+    {
+        $cmd = $this->commandList->fetchNext();
+
+        $this->commandDispatcher->dispatch($cmd);
+        $this->eventPublisher->publish($cmd);
     }
 }
